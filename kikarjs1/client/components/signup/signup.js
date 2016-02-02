@@ -12,7 +12,8 @@ hakikar.controller('login', ['$rootScope', '$scope', '$state','$timeOut','server
                 firstName: $scope.fname,
                 lastName: $scope.lname,
                 pushKey: app.pushKey,
-                platform: app.platform
+                platform: app.platform,
+                isTeacher : $scope.isTeacher
             }
             server.request('login', req, "POST",'')
 		

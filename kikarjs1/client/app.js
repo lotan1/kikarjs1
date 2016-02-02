@@ -5,8 +5,29 @@ var hakikar = angular.module('hakikar', ['ui.router'])
 
 /**** UI Router ****/
 .config(function ($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise("/login");
+    $urlRouterProvider.otherwise("/home");
 
+    $stateProvider
+		.state("home", {
+		    url: "/home",
+		    views: {
+		        "main": {
+		            templateUrl: "components/home/home.html",
+		            controller: "home"
+		        }
+		    }
+		})
+
+    $stateProvider
+		.state("signup", {
+		    url: "/signup",
+		    views: {
+		        "main": {
+		            templateUrl: "components/signup/signup.html",
+		            controller: "signup"
+		        }
+		    }
+		})
     $stateProvider
 		.state("login", {
 		    url: "/login",
