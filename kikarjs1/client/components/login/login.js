@@ -8,7 +8,7 @@ hakikar.controller('login', ['$scope', '$state', '$timeout', 'server', '$rootSco
             var req = {
                 email: $scope.email,
                 password: $scope.password,
-				isTeacher : $scope.isTeacher
+
             }
             server.request('login', req, "POST",'')
 		.then(function (data) {
