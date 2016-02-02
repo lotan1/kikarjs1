@@ -1,4 +1,4 @@
-torScoreApp.directive('header', ['$state', '$rootScope', function ($state, $rootScope) {
+hakikar.directive('header', ['$state', '$rootScope', function ($state, $rootScope) {
     return {
         restrict: 'E',
         templateUrl: './directives/header/header.html',

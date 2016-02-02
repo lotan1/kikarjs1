@@ -1,4 +1,4 @@
-var torScoreApp = angular.module('torScoreApp', ['ui.router'])
+var hakikar = angular.module('hakikar', ['ui.router'])
 
 /**** UI Router ****/
 .config(function ($stateProvider, $urlRouterProvider) {

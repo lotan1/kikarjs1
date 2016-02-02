@@ -1,3 +1,3 @@
-torScoreApp.controller('innerPageA', ['$rootScope', '$scope', '$state', function ($rootScope, $scope, $state) {
+hakikar.controller('innerPageA', ['$rootScope', '$scope', '$state', function ($rootScope, $scope, $state) {
     
 } ]);

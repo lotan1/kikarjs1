@@ -1,5 +1,18 @@
-torScoreApp.controller('login', ['$rootScope', '$scope', '$state', function ($rootScope, $scope, $state) {
+hakikar.controller('login', ['$rootScope', '$scope', '$state','$timeOut','server', function ($rootScope, $scope, $state,$timeOut) {
     $scope.enterClick = function () {
         $state.transitionTo('welcome');
     }
+	
+	
+	$scope.login = function () {
+		
+		var req = {
+                email: $scope.email,
+                password: $scope.password,
+                pushKey: app.pushKey,
+                platform: app.platform
+            }
+            server.request('login', req, "POST",'')
+		
+	}
 } ]);
