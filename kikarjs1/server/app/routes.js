@@ -3,7 +3,40 @@ var encoding ="utf8";
 
 var msgInfo = {};
 
-module.exports = function(app,passport,TeachersSchema,StudentsSchema) {
+module.exports = function(app,passport,TeachersSchema,StudentsSchema,ProjectSchema) {
+
+
+
+	app.post('/test', function(req,res) {
+			
+			var test = new ProjectSchema();
+			console.log(test);
+			
+		});
+		
+		
+		
+	app.post('/createProject', function(req,res) {
+			
+			var test = new ProjectSchema();
+			console.log(test);
+			
+	
+	
+	});
+
+
+	app.post('/createIdea', function(req,res) {
+			
+			var test = new ProjectSchema();
+			console.log(test);
+			
+	
+	
+	});
+		
+
+
 
 	app.post('/login', function(req, res, next) {
         passport.authenticate('local-login', function(err, user, info) {
@@ -58,7 +91,8 @@ module.exports = function(app,passport,TeachersSchema,StudentsSchema) {
     });
     
 	
-	
+	  
+
 
     
     

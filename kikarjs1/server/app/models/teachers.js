@@ -10,17 +10,7 @@ var TeachersSchema = mongoose.Schema({
     firstName : String,
     lastName  : String,
     email     : String,
-    password  : String,
-    projects  : [{
-
-        name : String,
-        text : String,
-        minGroup : String,
-        maxGroup : String,
-        groupCode : String,
-        
-    }]
-
+    password  : String
 
 });
 
