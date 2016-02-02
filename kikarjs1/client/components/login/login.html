@@ -4,7 +4,7 @@
   <form role="form">
     <div class="form-group">
       <label for="email">Email:</label>
-      <input type="email" class="form-control" id="email" placeholder="Enter email" data-ng-model="email">
+      <input type="email" class="form-control" id="mail" placeholder="Enter email" data-ng-model="email">
     </div>
     <div class="form-group">
       <label for="pwd">Password:</label>
@@ -12,6 +12,9 @@
     </div>
     <div class="checkbox">
       <label><input type="checkbox"> Remember me</label>
+    </div>
+	<div class="checkbox">
+      <label><input type="checkbox" ng-model="isTeacher" ng-true-value=true ng-false-value=false>Teacher</label>
     </div>
     <button type="submit" class="btn btn-default" ng-click="login()">Submit</button>
   </form>

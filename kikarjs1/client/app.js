@@ -1,3 +1,6 @@
+
+var domain = 'http://localhost:4500'; //local
+
 var hakikar = angular.module('hakikar', ['ui.router'])
 
 /**** UI Router ****/
