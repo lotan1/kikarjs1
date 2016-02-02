@@ -21,6 +21,8 @@ var crypto = require('crypto'); //for generate random token
 var TeachersSchema            = require('./app/models/teachers');
 var StudentsSchema = require('./app/models/students');
 var ProjectSchema = require('./app/models/projects');
+var IdeaSchema = require('./app/models/ideas');
+
 
 var configDB = require('./config/database.js');
 
@@ -65,7 +67,7 @@ app.use(passport.session()); // persistent login sessions
 
 
 // routes ======================================================================
-require('./app/routes.js')(app,passport,TeachersSchema,StudentsSchema,ProjectSchema); // load our routes and pass in our app and fully configured passport
+require('./app/routes.js')(app,passport,TeachersSchema,StudentsSchema,ProjectSchema,IdeaSchema); // load our routes and pass in our app and fully configured passport
 
 // launch ======================================================================
 app.listen(port);

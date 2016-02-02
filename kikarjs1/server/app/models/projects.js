@@ -21,7 +21,8 @@ var ProjectSchema = mongoose.Schema({
 			
             return token;
         }
-		}
+		},
+		state: Number
 
 });
 

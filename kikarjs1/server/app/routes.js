@@ -16,10 +16,25 @@ module.exports = function(app,passport,TeachersSchema,StudentsSchema,ProjectSche
 		
 		
 		
-	app.post('/createProject', function(req,res) {
+	app.post('/createProject', function(req,res) { //req --> teacherId
 			
-			var test = new ProjectSchema();
-			console.log(test);
+			var project = new ProjectSchema();
+			project.teacherId = req.body.teacherId;
+			project.name   = req.body.teacherId;
+			project.text = req.body.text;
+			project.minGroup = req.body.minGroup;
+			project.maxGroup = req.body.maxGroup;
+			project.state = 0;
+			
+			project.save(function(err)
+			{
+			if(err)
+			   throw err
+			});
+			
+			msgInfo = {status:"success",statusCode : 0, message : "project created"};
+			return msgInfo;
+			
 			
 	
 	
@@ -28,7 +43,7 @@ module.exports = function(app,passport,TeachersSchema,StudentsSchema,ProjectSche
 
 	app.post('/createIdea', function(req,res) {
 			
-			var test = new ProjectSchema();
+			var test = new Idea();
 			console.log(test);
 			
 	
