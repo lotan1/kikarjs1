@@ -38,21 +38,21 @@ var hakikar = angular.module('hakikar', ['ui.router'])
 		        }
 		    }
 		})
-        .state("innerPageA", {
-            url: "/innerPageA",
+        .state("createIdea", {
+            url: "/createIdea",
             views: {
                 "main": {
-                    templateUrl: "components/innerPageA/innerPageA.html",
-                    controller: "innerPageA"
+                    templateUrl: "components/createIdea/createi.html",
+                    controller: "createIdea"
                 }
             }
         })
-        .state("innerPageB", {
-            url: "/innerPageB",
+        .state("createProject", {
+            url: "/createProject",
             views: {
                 "main": {
-                    templateUrl: "components/innerPageB/innerPageB.html",
-                    controller: "innerPageB"
+                    templateUrl: "components/createProject/createp.html",
+                    controller: "createProject"
                 }
             }
         })

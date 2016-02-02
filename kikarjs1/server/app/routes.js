@@ -16,7 +16,7 @@ module.exports = function(app,passport,TeachersSchema,StudentsSchema,ProjectSche
 		
 		
 		
-	app.post('/createProject', function(req,res) { //req --> teacherId
+	app.post('/createProject', function(req,res) { //
 			
 			var project = new ProjectSchema();
 			project.teacherId = req.body.teacherId;
