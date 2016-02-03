@@ -1,3 +1,7 @@
+
+
+var user;
+
 hakikar.controller('login', ['$scope', '$state', '$timeout', 'server', '$rootScope', function ($scope, $state, $timeout, server, $rootScope) {
   
 
@@ -18,6 +22,7 @@ hakikar.controller('login', ['$scope', '$state', '$timeout', 'server', '$rootSco
 				{
 					alert("ok");
 				    console.log(data);
+					user = data;
 		        }
 		        if ((data) && (data.statusCode == 1)) {
 		            $scope.userNotFound = true;

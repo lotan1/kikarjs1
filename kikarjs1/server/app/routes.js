@@ -18,9 +18,10 @@ module.exports = function(app,passport,TeachersSchema,StudentsSchema,ProjectSche
 		
 	app.post('/createProject', function(req,res) { //req --> teacherId
 			
+			console.log("in");
 			var project = new ProjectSchema();
 			project.teacherId = req.body.teacherId;
-			project.name   = req.body.teacherId;
+			project.name   = req.body.name;
 			project.text = req.body.text;
 			project.minGroup = req.body.minGroup;
 			project.maxGroup = req.body.maxGroup;
@@ -68,7 +69,7 @@ module.exports = function(app,passport,TeachersSchema,StudentsSchema,ProjectSche
 	
 	app.post('/getIdeas', function(req,res) { //req ->> projectId
 			
-		IdeaSchema.find({'projectId':req.body.projectId},funcrion(err,ideas){
+		IdeaSchema.find({'projectId':req.body.projectId},function(err,ideas){
 			if(err){
 				console.log("error");
 				throw err;
@@ -95,7 +96,7 @@ module.exports = function(app,passport,TeachersSchema,StudentsSchema,ProjectSche
 	
 	app.post('/getProjects', function(req,res) { //req ->> projectId
 			
-		ProjectSchema.find({},funcrion(err,projects){
+		ProjectSchema.find({},function(err,projects){
 			if(err){
 				console.log("error");
 				throw err;
@@ -122,7 +123,7 @@ module.exports = function(app,passport,TeachersSchema,StudentsSchema,ProjectSche
 			
 			
 			
-		IdeaSchema.findOne({'_id':req.body.ideaId},funcrion(err,idea){
+		IdeaSchema.findOne({'_id':req.body.ideaId},function(err,idea){
 			if(err){
 				console.log("error");
 				throw err;
@@ -142,7 +143,7 @@ module.exports = function(app,passport,TeachersSchema,StudentsSchema,ProjectSche
 			}
 			
 			
-		ProjectSchema.findOne({'_id':idea.projectId},funcrion(err,project){
+		ProjectSchema.findOne({'_id':idea.projectId},function(err,project){
 	
 		  if(err){
 				console.log("error");

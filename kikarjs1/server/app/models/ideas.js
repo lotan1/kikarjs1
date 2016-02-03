@@ -7,7 +7,6 @@ var mongoose = require('mongoose');
 // define the schema for our user model
 var IdeasSchema = mongoose.Schema({
 	
-		teacherId :{ type: String, ref: 'Teachers' },
 		projectId :{ type: String, ref: 'ProjectSchema' },
 		creatorStudentId : { type: String, ref: 'Students' },
         name : String,

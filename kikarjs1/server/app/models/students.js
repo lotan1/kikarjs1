@@ -11,7 +11,8 @@ var StudentsSchema = mongoose.Schema({
         firstName : String,
         lastName  : String,
         email	  : String,
-        password  : String
+        password  : String,
+		isStudent : { type: Boolean, default: true }
 		
 });
 

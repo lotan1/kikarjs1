@@ -157,9 +157,7 @@ module.exports = function(passport,services) {
         // find a user whose email is the same as the forms email
         // we are checking to see if the user trying to login already exists
         
-		if(req.body.isTeacher)
-		{
-			
+	
 		TeachersSchema.findOne({ 'email' :  email }, function(err, user) {
             // if there are any errors, return the error before anything else
             if (err)
@@ -167,27 +165,25 @@ module.exports = function(passport,services) {
 
             // if no user is found, return the message
             if (!user)
-                return done(null, false, {msgInfo :{status:"error",statusCode : 1, message : "user not found"}}); // req.flash is the way to set flashdata using connect-flash
-
-            // if the user is found but the password is wrong
-            if (!user.validPassword(password))
-                return done(null, false, {msgInfo :{status:"error",statusCode : 2, message : "wrong password"}}); // create the loginMessage and save it to session as flashdata
-
-            // all is well, return successful user
-            return done(null, user, {msgInfo :{status:"success",statusCode : 0, message : "userLoggedIn"}});
-        });
-		
-		}
-		else
-		{	
-		StudentsSchema.findOne({ 'email' :  email }, function(err, user) {
+			{
+			StudentsSchema.findOne({ 'email' :  email }, function(err, student) {
             // if there are any errors, return the error before anything else
             if (err)
                 return done(err);
 
             // if no user is found, return the message
-            if (!user)
+            if (!student)
                 return done(null, false, {msgInfo :{status:"error",statusCode : 1, message : "user not found"}}); // req.flash is the way to set flashdata using connect-flash
+
+            // if the user is found but the password is wrong
+            if (!student.validPassword(password))
+                return done(null, false, {msgInfo :{status:"error",statusCode : 2, message : "wrong password"}}); // create the loginMessage and save it to session as flashdata
+				
+			
+            // all is well, return successful user
+            return done(null, student, {msgInfo :{status:"success",statusCode : 0, message : "userLoggedIn"}});
+          });
+		  }
 
             // if the user is found but the password is wrong
             if (!user.validPassword(password))
@@ -195,8 +191,15 @@ module.exports = function(passport,services) {
 
             // all is well, return successful user
             return done(null, user, {msgInfo :{status:"success",statusCode : 0, message : "userLoggedIn"}});
+			
+			
+			
         });
-		}
+		
+		
+			
+		
+		
 
     }));
 
