@@ -3,7 +3,7 @@ var encoding ="utf8";
 
 var msgInfo = {};
 
-module.exports = function(app,passport,TeachersSchema,StudentsSchema,ProjectSchema) {
+module.exports = function(app,passport,TeachersSchema,StudentsSchema,ProjectSchema,IdeaSchema) {
 
 
 
@@ -43,12 +43,121 @@ module.exports = function(app,passport,TeachersSchema,StudentsSchema,ProjectSche
 
 	app.post('/createIdea', function(req,res) {
 			
-			var test = new Idea();
-			console.log(test);
+			var idea = new IdeaSchema();
+			idea.projectId = req.body.projectId;
+			idea.creatorStudentId = req.body.creatorStudentId
+			idea.name = req.body.name
+			idea.text = req.body.text;
+			idea.linkA = req.body.linkA;
+			idea.linkB = req.body.linkA;
+			
+			idea.save(function(err)
+			{
+			if(err)
+			   throw err
+			});
+			
+			msgInfo = {status:"success",statusCode : 0, message : "idea created"};
+			return msgInfo;
+			
 			
 	
 	
 	});
+	
+	
+	app.post('/getIdeas', function(req,res) { //req ->> projectId
+			
+		IdeaSchema.find({'projectId':req.body.projectId},funcrion(err,ideas){
+			if(err){
+				console.log("error");
+				throw err;
+			}
+			
+			if(ideas.length <= 0){
+				console.log("no ideas to project");
+				msgInfo = {status:"success",statusCode : 1, message : "no idea to project"};
+				return msgInfo;
+			}
+			
+			msgInfo = {status:"success",statusCode : 0, message : "ideas sent"};
+			msgInfo.ideas =  ideas;
+			return msgInfo;
+			
+			
+		});	
+			
+			
+	
+	
+	});
+	
+	
+	app.post('/getProjects', function(req,res) { //req ->> projectId
+			
+		ProjectSchema.find({},funcrion(err,projects){
+			if(err){
+				console.log("error");
+				throw err;
+			}
+			
+			if(projects.length <= 0){
+				console.log("no ideas to project");
+				msgInfo = {status:"success",statusCode : 1, message : "no projects"};
+				return msgInfo;
+			}
+			
+			msgInfo = {status:"success",statusCode : 0, message : "ideas sent"};
+			msgInfo.projects =  projects;
+			return msgInfo;
+			
+			
+		});	
+			
+
+	});
+	
+	
+	app.post('/joinToIdea', function(req,res) { //req ->> ideaId , studentId(userLoggedIn)  , 
+			
+		IdeaSchema.findOne({'_id':req.body.ideaId},funcrion(err,idea){
+			if(err){
+				console.log("error");
+				throw err;
+			}
+			
+			if(!idea){
+				console.log("no idea in dataBase");
+				msgInfo = {status:"success",statusCode : 1, message : "no idea in dataBase"};
+				return msgInfo;
+			}
+			
+			if(idea.creatorStudentId == studentId){
+				console.log("user creator cannot join");
+				msgInfo = {status:"success",statusCode : 1, message : "user creator cannot join"};
+				return msgInfo;
+				
+			}
+			
+			if(idea.groupStudentId){
+				console.log("user creator cannot join");
+				msgInfo = {status:"success",statusCode : 1, message : "user creator cannot join"};
+				return msgInfo;
+				
+			}
+			
+			
+		});	
+			
+
+	});
+	
+	
+	
+	
+	
+	
+	
 		
 
 
@@ -113,17 +222,4 @@ module.exports = function(app,passport,TeachersSchema,StudentsSchema,ProjectSche
     
 
 };
-
-// route middleware to make sure a user is logged in
-function isLoggedIn(req, res, next) {
-
-
-
-    //if user is authenticated in the session, carry on
-    if (req.isAuthenticated())
-        return next();
-    console.log("session closed");
-    // if they aren't redirect them to the home page
-    res.redirect('/');
-}
 
