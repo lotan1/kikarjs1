@@ -7,9 +7,8 @@ hakikar.controller('login', ['$scope', '$state', '$timeout', 'server', '$rootSco
             var req = {
                 name: $scope.name,
                 text: $scope.text,
-                minGroup: $scope.minGroup,
-                maxGroup: $scope.maxGroup,
-                state: $scope.state,
+                linkA: $scope.linkA,
+                linkB: $scope.linkB,
             }
             server.request('crateProject', req, "POST",'')
                 .then(function (data) {
@@ -23,3 +22,4 @@ hakikar.controller('login', ['$scope', '$state', '$timeout', 'server', '$rootSco
     }
 
 } ]);
+
