@@ -16,7 +16,7 @@ module.exports = function(app,passport,TeachersSchema,StudentsSchema,ProjectSche
 		
 		
 		
-	app.post('/createProject', function(req,res) { //
+	app.post('/createProject', function(req,res) { //req --> teacherId
 			
 			var project = new ProjectSchema();
 			project.teacherId = req.body.teacherId;
@@ -120,6 +120,8 @@ module.exports = function(app,passport,TeachersSchema,StudentsSchema,ProjectSche
 	
 	app.post('/joinToIdea', function(req,res) { //req ->> ideaId , studentId(userLoggedIn)  , 
 			
+			
+			
 		IdeaSchema.findOne({'_id':req.body.ideaId},funcrion(err,idea){
 			if(err){
 				console.log("error");
@@ -132,19 +134,58 @@ module.exports = function(app,passport,TeachersSchema,StudentsSchema,ProjectSche
 				return msgInfo;
 			}
 			
-			if(idea.creatorStudentId == studentId){
+			if(idea.creatorStudentId == req.body.studentId){
 				console.log("user creator cannot join");
 				msgInfo = {status:"success",statusCode : 1, message : "user creator cannot join"};
 				return msgInfo;
 				
 			}
 			
-			if(idea.groupStudentId){
-				console.log("user creator cannot join");
-				msgInfo = {status:"success",statusCode : 1, message : "user creator cannot join"};
+			
+		ProjectSchema.findOne({'_id':idea.projectId},funcrion(err,project){
+	
+		  if(err){
+				console.log("error");
+				throw err;
+			}
+			
+		  if(!project){
+				console.log("no project in dataBase");
+				msgInfo = {status:"success",statusCode : 1, message : "no project in dataBase"};
+				return msgInfo;
+			}
+		  
+		  if(idea.groupStudentId.length  >= project.maxGroup){
+				console.log("user cannot join (max group)");
+				msgInfo = {status:"success",statusCode : 1, message : "user cannot join (max group)"};
 				return msgInfo;
 				
 			}
+			
+		  for(var key in idea.groupStudentId){
+			  
+			  if(idea.groupStudentId[key] == req.body.studentId){
+				console.log("user cannot join (already added)");
+				msgInfo = {status:"success",statusCode : 1, message : "user cannot join (already added)"};
+				return msgInfo; 
+			  }
+		  }
+		  
+		  idea.groupStudentId.push(req.body.studentId);
+		  idea.markModified('groupStudentId');
+          idea.save(function(err){
+               if(err)
+			   {throw err}
+			
+          });
+		
+		console.log("student join");
+		msgInfo = {status:"success",statusCode : 0, message : "student join"};
+		return msgInfo; 
+		
+		});
+			
+			
 			
 			
 		});	
