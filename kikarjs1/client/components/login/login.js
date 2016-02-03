@@ -13,21 +13,11 @@ hakikar.controller('login', ['$scope', '$state', '$timeout', 'server', '$rootSco
             server.request('login', req, "POST",'')
 		.then(function (data) {
 		    $timeout(function () {
-		        $scope.somthingRong = false;
+		        $scope.somthingWrong = false;
 		        if ((data) && (data.statusCode == 0)) 
 				{
 					alert("ok");
 				    console.log(data);
-		            // if (data && data.user && data.user.children) {
-		                // $rootScope.parent = data.user;
-		                // if (data.user.children.length == 0) {
-		                    // $state.transitionTo('deviceSetUp');
-                            // return;
-		                // } else {
-		                    // var now = data.user.children[0];
-		                    // $rootScope.$broadcast('arrChanges',{load:'new'});
-		                // }
-		            // }
 		        }
 		        if ((data) && (data.statusCode == 1)) {
 		            $scope.userNotFound = true;
