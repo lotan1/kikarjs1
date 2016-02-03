@@ -5,9 +5,11 @@ hakikar.controller('login', ['$scope', '$state', '$timeout', 'server', '$rootSco
 		$timeout(function () {
 
             var req = {
-                email: $scope.email,
-                password: $scope.password,
-
+                name: $scope.name,
+                text: $scope.text,
+				minGroup: $scope.minGroup,
+				maxGroup: $scope.maxGroup,
+				state: $scope.state,
             }
             server.request('crateProject', req, "POST",'')
 		.then(function (data) {
